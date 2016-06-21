@@ -1,42 +1,35 @@
-'use strict';
-
-var path = require('path');
-var webpack = require('webpack');
+var fs = require('fs')
+var path = require('path')
+var webpack = require('webpack')
 
 module.exports = {
-  devtool: 'eval-source-map',
-  entry: {
-    layout:path.join(__dirname, 'views/layout.jsx'),
-    index:path.join(__dirname, 'views/index.jsx'),
-    student:path.join(__dirname, 'views/student.jsx')
-  },
+
+  //devtool: 'source-map',
+
+  entry: './modules/client.js',
+
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: __dirname + '/__build__',
     filename: '[name].js',
-    publicPath: '/'
+    chunkFilename: '[id].chunk.js',
+    publicPath: '/__build__/'
   },
+
+  module: {
+    loaders: [
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel' }
+    ]
+  },
+
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: { warnings: false },
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
-  ],
-  module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
-      }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
-    }]
-  }
-};
+  ]
+
+}
