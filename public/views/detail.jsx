@@ -15,33 +15,23 @@
 
 'use strict';
 
-module.exports = {
+var React = require('react');
 
-  entry: __dirname + '/public/index.js',
+module.exports = React.createClass({
+  displayName: 'Detail',
 
-  output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
-  },
+  render: function render() {
+    var movieId = this.props.params.id;
+    var movie = this.props.movies.filter(function(_movie) {
+      return _movie.id === movieId;
+    })[0];
 
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    return (
+      <div id='detail'>
+        <h1>{movie.title}</h1>
+        <img src={movie.image} alt={movie.title} />
+        <a href={movie.url} target='_blank'>more info</a>
+      </div>
+    );
   }
-};
+});

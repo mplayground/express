@@ -15,33 +15,27 @@
 
 'use strict';
 
-module.exports = {
+import React from 'react';
+import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
 
-  entry: __dirname + '/public/index.js',
+import Layout from './views/layout.jsx';
+import ListPage from './views/list.jsx';
+import DetailPage from './views/detail.jsx';
+import Error404 from './views/404.jsx';
 
-  output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
-  },
+// jsx추가
+import TestPage from './views/test.jsx';
+import StudentPage from './views/student.jsx';
 
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
-  }
-};
+module.exports = (
+  <Router history={browserHistory}>
+    <Route path='/' component={Layout}>
+      <IndexRoute component={ListPage} />
+      //라우터 추가
+      <Route path='/test' component={TestPage} />
+      <Route path='/student/:id' component={StudentPage} />
+      <Redirect from='/gohome' to='/' />
+      <Route path='*' component={Error404} />
+    </Route>
+  </Router>
+);

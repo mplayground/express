@@ -1,21 +1,29 @@
 {
-  "name": "react-router-lazy-route-server-rendering",
+  "name": "react-engine-example-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "client.js",
-  "dependencies": {
-    "babel": "^5.8.34",
-    "babel-core": "^5.8.34",
-    "babel-loader": "^5.4.0",
-    "history": "^1.13.1",
-    "react": "^0.14.2",
-    "react-dom": "^0.14.2",
-    "react-router": "^1.0.0",
-    "webpack": "^1.12.6"
-  },
+  "main": "index.js",
   "scripts": {
-    "start": "webpack --progress && babel-node modules/server.js"
+    "start": "webpack && node index.js",
+    "dev": "webpack -w & nodemon index.js"
   },
-  "author": "Ryan Florence",
-  "license": "ISC"
+  "author": "Sam Selvanathan (sjasel@gmail.com)",
+  "dependencies": {
+    "babel-core": "^6.3.17",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "express": "^4.13.3",
+    "history": "^3.0.0",
+    "json-loader": "^0.5.4",
+    "react": "^0.14.3",
+    "react-engine": "^3.0.0",
+    "react-router": "^2.4.0",
+    "react-dom": "^15.0.0",
+    "serve-favicon": "^2.3.0",
+    "webpack": "^1.12.9"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
+  }
 }

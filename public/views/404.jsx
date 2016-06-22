@@ -15,33 +15,14 @@
 
 'use strict';
 
-module.exports = {
+var React = require('react');
 
-  entry: __dirname + '/public/index.js',
+module.exports = React.createClass({
+  displayName: '404',
 
-  output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+  render: function render() {
+    return (
+      <h1>URL: {this.props.location.pathname} - Not Found(404)</h1>
+    );
   }
-};
+});

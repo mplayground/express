@@ -15,33 +15,27 @@
 
 'use strict';
 
-module.exports = {
+var React = require('react');
 
-  entry: __dirname + '/public/index.js',
+module.exports = React.createClass({
+  displayName: 'Layout',
 
-  output: {
-    path: __dirname + '/public',
-    filename: 'bundle.js'
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+  render: function render() {
+    return (
+      <html>
+        <head>
+          <meta charSet='utf-8' />
+          <title>React Engine Example App</title>
+          <link rel='stylesheet' href='/styles.css'></link>
+        </head>
+        <body>
+          <div>
+            {/* Router now automatically populates this.props.children of your components based on the active route. https://github.com/rackt/react-router/blob/latest/CHANGES.md#routehandler */}
+            {this.props.children}
+          </div>
+          <script src='/bundle.js'></script>
+        </body>
+      </html>
+    );
   }
-};
+});
