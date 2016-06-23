@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var teachers = require('../controllers/teacherController');
+var teacherController = require('../controllers/teacherController');
 
 router.route('/')
-  .get(teachers.get)
-  .post(teachers.post);
+  .get(teacherController.get)
+  .post(teacherController.post);
 
 module.exports = router;
