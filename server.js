@@ -21,8 +21,14 @@ import {join} from 'path';
 import express from 'express';
 import favicon from 'serve-favicon';
 import ReactEngine from 'react-engine';
+import bodyParser from 'body-parser';
+
+// Test
 import movies from './movies.json';
 import routes from './public/routes.jsx';
+
+// RestAPI Routers
+
 
 let app = express();
 
@@ -34,6 +40,17 @@ let engine = ReactEngine.server.create({
     console.log(stats);
   }
 });
+
+// set json parser for Restful API
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+// set Restful API Controllers
+import teachers from './api/routes/teachers'
+import students from './api/routes/students'
+app.use('/teachers',teachers)
+app.use('/students',students)
+// app.user('/enrollments',enrollments)
 
 // set the engine
 app.engine('.jsx', engine);
@@ -55,21 +72,21 @@ app.use(favicon(join(__dirname, '/public/favicon.ico')));
 // add our app routes
 
 // 라우터를 추가해 본다.
-app.get('/test', function(req, res) {
-  res.render(req.url, {title: 'my first test'});
-});
+// 명시적으로 선언을 하면 "*"보다 우선순위가 높다.
+// app.get('/test', function(req, res) {
+//   res.render(req.url, {title: 'my first test'});
+// });
+//
+// app.get('/student/:id', function(req, res) {
+//   res.render(req.url, {title: 'student'});
+// });
 
-app.get('/student/:id', function(req, res) {
-  res.render(req.url, {title: 'student'});
-});
-/*
 app.get('*', function(req, res) {
   console.log("req.url : " + req.url);
   res.render(req.url, {
     movies: movies
   });
 });
-*/
 
 app.use(function(err, req, res, next) {
   console.error(err);

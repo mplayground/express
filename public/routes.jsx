@@ -34,6 +34,7 @@ module.exports = (
       //라우터 추가
       <Route path='/test' component={TestPage} />
       <Route path='/student/:id' component={StudentPage} />
+      <Route path='/movie/:id' component={DetailPage} />
       <Redirect from='/gohome' to='/' />
       <Route path='*' component={Error404} />
     </Route>

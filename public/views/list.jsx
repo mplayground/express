@@ -13,15 +13,11 @@
 |  the specific language governing permissions and limitations under the License.                                     |
 \*-------------------------------------------------------------------------------------------------------------------*/
 
-'use strict';
+import React from 'react';
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 
-var React = require('react');
-var Router = require('react-router');
-
-module.exports = React.createClass({
-  displayName: 'List',
-
-  render: function render() {
+export default class Movies extends React.Component {
+  render(){
     return (
       <div id='list'>
         <h1>Movies</h1>
@@ -30,15 +26,14 @@ module.exports = React.createClass({
           {this.props.movies.map(function(movie) {
             return (
               <li key={movie.id}>
-                <Router.Link to={'/movie/' + movie.id}>
+                <Link to={'/movie/' + movie.id}>
                   <img src={movie.image} alt={movie.title} />
-                </Router.Link>
+                </Link>
               </li>
             );
           })}
-
         </ul>
       </div>
     );
   }
-});
+}

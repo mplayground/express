@@ -13,14 +13,10 @@
 |  the specific language governing permissions and limitations under the License.                                     |
 \*-------------------------------------------------------------------------------------------------------------------*/
 
-'use strict';
+import React from 'react';
 
-var React = require('react');
-
-module.exports = React.createClass({
-  displayName: 'Detail',
-
-  render: function render() {
+export default class Detail extends React.Component {
+  render(){
     var movieId = this.props.params.id;
     var movie = this.props.movies.filter(function(_movie) {
       return _movie.id === movieId;
@@ -34,4 +30,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}

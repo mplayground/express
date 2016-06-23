@@ -13,14 +13,10 @@
 |  the specific language governing permissions and limitations under the License.                                     |
 \*-------------------------------------------------------------------------------------------------------------------*/
 
-'use strict';
+import React from 'react';
 
-var React = require('react');
-
-module.exports = React.createClass({
-  displayName: 'Layout',
-
-  render: function render() {
+export default class Layout extends React.Component {
+  render() {
     return (
       <html>
         <head>
@@ -38,4 +34,4 @@ module.exports = React.createClass({
       </html>
     );
   }
-});
+}
