@@ -46,8 +46,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // set Restful API Controllers
-import teachers from './api/routes/teachers'
-import students from './api/routes/students'
+import teachers from './routes/teachers'
+import students from './routes/students'
 app.use('/teachers',teachers)
 app.use('/students',students)
 // app.user('/enrollments',enrollments)
