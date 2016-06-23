@@ -28,8 +28,6 @@ import movies from './movies.json';
 import routes from './public/routes.jsx';
 
 // RestAPI Routers
-
-
 let app = express();
 
 // create the view engine with `react-engine`
@@ -46,10 +44,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // set Restful API Controllers
-import teachers from './routes/teachers'
-import students from './routes/students'
-app.use('/teachers',teachers)
-app.use('/students',students)
+import teacherRoute from './routes/teacherRoute'
+import studentRoute from './routes/studentRoute'
+app.use('/teachers',teacherRoute)
+app.use('/students',studentRoute)
 // app.user('/enrollments',enrollments)
 
 // set the engine
@@ -68,18 +66,6 @@ app.set('view', ReactEngine.expressView);
 app.use(express.static(join(__dirname, '/public')));
 
 app.use(favicon(join(__dirname, '/public/favicon.ico')));
-
-// add our app routes
-
-// 라우터를 추가해 본다.
-// 명시적으로 선언을 하면 "*"보다 우선순위가 높다.
-// app.get('/test', function(req, res) {
-//   res.render(req.url, {title: 'my first test'});
-// });
-//
-// app.get('/student/:id', function(req, res) {
-//   res.render(req.url, {title: 'student'});
-// });
 
 app.get('*', function(req, res) {
   console.log("req.url : " + req.url);
