@@ -1,4 +1,8 @@
+var passport = require('passport');
 var models  = require('../models');
+var auth = require('../auth');
+// 패스포트 세팅
+require('../passport').setup();
 
 exports.findAll = function(req, res) {
   models.Student
@@ -37,6 +41,16 @@ exports.post = function(req, res) {
     });
 };
 
-exports.login = function(req, res) {
-  res.send('POST students login');
+exports.login = function(req, res, next) {
+  console.log("try login");
+
+  //  패스포트 모듈로 인증 시도
+  passport.authenticate('local', function (err, user, info) {
+    console.log("success to auth " + user.id);
+    var error = err || info;
+    if (error) return res.json(401, error);
+    if (!user) return res.json(404, {message: 'Something went wrong, please try again.'});
+    var token = auth.signToken(user.id);
+    res.json({access_token: token});
+  })(req, res, next);
 };

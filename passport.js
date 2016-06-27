@@ -3,7 +3,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-var models  = require('../models');
+var models  = require('./models');
 
 exports.setup = function () {
   passport.use(new LocalStrategy({
@@ -11,13 +11,18 @@ exports.setup = function () {
         passwordField: 'password'
       },
       function(username, password, done) {
-        models.Student.
+        console.log("passport " + username + ":" + password);
+
+        models.Student
           .findOne({ where : {username : username} })
           .then(function(user){
             if(user != null){
               if(user.password === password){
                 // 로그인 성공시 유저 아이디를 넘겨준다.
-                var user = {id: 'user_1'};
+                var user = {id: user.id};
+
+                console.log("success find user " + user.id);
+
                 return done(null, user);
               }else{
                 return done(null, false, { message: 'Fail to login.' });
@@ -30,14 +35,19 @@ exports.setup = function () {
   ));
 
   passport.serializeUser(function(user,done){
+    console.log("serializeUser : " + user);
     done(null, user.id);
   });
 
-  passport.serializeUser(function(id,done){
-    models.Student.
+  passport.deserializeUser(function(id,done){
+
+    console.log("deserializeUser : " + id);
+
+    models.Student
       .findOne({ where : {id : id} })
       .then(function(user){
-        done(err, user);
+        console.log("deserializeUser : " + user);
+        done(null, user);
       });
   });
 
