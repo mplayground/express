@@ -5,6 +5,7 @@ var auth = require('../auth');
 require('../passport').setup();
 
 exports.findAll = function(req, res) {
+  console.log('findAll' + req.user.id + "," + req.user.name);
   models.Student
     .findAll()
     .then(function(students) {
@@ -21,10 +22,9 @@ exports.findOne = function(req, res) {
     });
 };
 
-exports.post = function(req, res) {
+exports.signup = function(req, res) {
   var reqStudent = req.body;
 
-  // TODO 권한체크
   models.Student
     .findOne({ where : {username : reqStudent.username} })
     .then(function(student){
@@ -50,7 +50,9 @@ exports.login = function(req, res, next) {
     var error = err || info;
     if (error) return res.json(401, error);
     if (!user) return res.json(404, {message: 'Something went wrong, please try again.'});
-    var token = auth.signToken(user.id);
-    res.json({access_token: token});
+
+    var token = auth.signToken({id:user.id, role:'student'});
+
+    res.json({ access_token: token });
   })(req, res, next);
 };

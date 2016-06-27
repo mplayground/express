@@ -20,9 +20,7 @@ exports.setup = function () {
               if(user.password === password){
                 // 로그인 성공시 유저 아이디를 넘겨준다.
                 var user = {id: user.id};
-
-                console.log("success find user " + user.id);
-
+                console.log("success find user " + JSON.stringify(user));
                 return done(null, user);
               }else{
                 return done(null, false, { message: 'Fail to login.' });
@@ -34,21 +32,21 @@ exports.setup = function () {
       }
   ));
 
-  passport.serializeUser(function(user,done){
-    console.log("serializeUser : " + user);
-    done(null, user.id);
-  });
-
-  passport.deserializeUser(function(id,done){
-
-    console.log("deserializeUser : " + id);
-
-    models.Student
-      .findOne({ where : {id : id} })
-      .then(function(user){
-        console.log("deserializeUser : " + user);
-        done(null, user);
-      });
-  });
+  // passport.serializeUser(function(user,done){
+  //   console.log("serializeUser : " + user);
+  //   done(null, user.id);
+  // });
+  //
+  // passport.deserializeUser(function(id,done){
+  //
+  //   console.log("deserializeUser : " + id);
+  //
+  //   models.Student
+  //     .findOne({ where : {id : id} })
+  //     .then(function(user){
+  //       console.log("deserializeUser : " + user);
+  //       done(null, user);
+  //     });
+  // });
 
 };
