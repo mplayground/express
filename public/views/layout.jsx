@@ -23,6 +23,10 @@ export default class Layout extends React.Component {
           <meta charSet='utf-8' />
           <title>React Engine Example App</title>
           <link rel='stylesheet' href='/styles.css'></link>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"></link>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css"></link>
+          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+          <script src='/bootstrap.min.js'></script>
         </head>
         <body>
           <div>

@@ -19,6 +19,9 @@ import React from 'react';
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
 
 import Layout from './views/layout.jsx';
+import MainPage from './views/main.jsx';
+import LoginPage from './views/login.jsx';
+import SignupPage from './views/signup.jsx';
 import ListPage from './views/list.jsx';
 import DetailPage from './views/detail.jsx';
 import Error404 from './views/404.jsx';
@@ -30,8 +33,11 @@ import StudentPage from './views/student.jsx';
 module.exports = (
   <Router history={browserHistory}>
     <Route path='/' component={Layout}>
-      <IndexRoute component={ListPage} />
+      <IndexRoute component={MainPage} />
       //라우터 추가
+      <Route path='/main' component={MainPage} />
+      <Route path='/login' component={LoginPage} />
+      <Route path='/signup' component={SignupPage} />
       <Route path='/test' component={TestPage} />
       <Route path='/student/:id' component={StudentPage} />
       <Route path='/movie/:id' component={DetailPage} />
