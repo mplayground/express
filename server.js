@@ -22,6 +22,7 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import ReactEngine from 'react-engine';
 import bodyParser from 'body-parser';
+import validationHandler from './validation/ValidationHandler'
 
 // Test
 import movies from './movies.json';
@@ -74,6 +75,9 @@ app.get('*', function(req, res) {
   });
 });
 
+app.use(validationHandler.errHandler)
+
+// React for middleware
 app.use(function(err, req, res, next) {
   console.error(err);
 
