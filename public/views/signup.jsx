@@ -31,8 +31,8 @@ export default class Signup extends React.Component {
   }
 
   register() {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    console.log('username : ' + this.state.username);
+    console.log('password : ' + this.state.password);
 
     $.ajax({
       url: '/students/signup',
@@ -43,24 +43,27 @@ export default class Signup extends React.Component {
       success: function(data) {
         console.log("data : " + data);
         alert('등록 성공');
-      },
+      }.bind(this),
       error: function(request, status, error) {
         console.log("request.status : " + request.status);
         alert('등록 실패');
-      }
+      }.bind(this)
     });
+
+    this.setState({username: ''});
+    this.setState({password: ''});
   }
 
   render(){
     return (
       <form>
         <FormGroup controlId="username">
-          <ControlLabel name={this.state.username}>ID</ControlLabel>
-          <FormControl type="text" onChange={this.usernameHandleChange} placeholder="Enter username" />
+          <ControlLabel>ID</ControlLabel>
+          <FormControl type="text" value={this.state.username} onChange={this.usernameHandleChange} placeholder="Enter username" />
         </FormGroup>
         <FormGroup controlId="password">
-          <ControlLabel name={this.state.password}>Password</ControlLabel>
-          <FormControl type="password" onChange={this.passwordHandleChange} placeholder="Enter password"  />
+          <ControlLabel>Password</ControlLabel>
+          <FormControl type="password" value={this.state.password} onChange={this.passwordHandleChange} placeholder="Enter password"  />
         </FormGroup>
         <Button bsStyle="primary" bsSize="large" onClick={this.register}>
           Register

@@ -23,6 +23,7 @@
     "mysql": "^2.11.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "passport-facebook": "^1.0.3",
     "password": "^0.1.1",
     "react": "^0.14.3",
     "react-dom": "^15.0.0",

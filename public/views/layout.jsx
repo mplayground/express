@@ -14,6 +14,7 @@
 \*-------------------------------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 
 export default class Layout extends React.Component {
   render() {
@@ -29,6 +30,14 @@ export default class Layout extends React.Component {
           <script src='/bootstrap.min.js'></script>
         </head>
         <body>
+          <div>
+            <ul>
+              <li><Link to={'/'}>메인</Link></li>
+              <li><Link to={'/login'}>로그인</Link></li>
+              <li><Link to={'/signup'}>회원가입</Link></li>
+            </ul>
+          </div>
+          <br />
           <div>
             {/* Router now automatically populates this.props.children of your components based on the active route. https://github.com/rackt/react-router/blob/latest/CHANGES.md#routehandler */}
             {this.props.children}
