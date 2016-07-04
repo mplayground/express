@@ -70,16 +70,14 @@ app.use(favicon(join(__dirname, '/public/favicon.ico')));
 
 app.get('*', function(req, res) {
   console.log("req.url : " + req.url);
-  res.render(req.url, {
-    movies: movies
-  });
+  res.render(req.url);
 });
 
 app.use(validationHandler.errHandler)
 
 // React for middleware
 app.use(function(err, req, res, next) {
-  console.error(err);
+  console.error('react-router' + err);
 
   // http://expressjs.com/en/guide/error-handling.html
   if (res.headersSent) {

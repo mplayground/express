@@ -14,37 +14,70 @@
 \*-------------------------------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+
+import TopMenu from './TopMenu.jsx'
+import { Row } from 'react-bootstrap'
 import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 
-export default class Layout extends React.Component {
-  render() {
-    return (
+ export default class Layout extends React.Component {
+   render() {
+     let head = {
+      __html:`
+        <meta charSet='utf-8' />
+        <title>React Engine Example App</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.29.5/react-bootstrap.min.js"></script>
+       `
+     };
+     return (
       <html>
-        <head>
-          <meta charSet='utf-8' />
-          <title>React Engine Example App</title>
-          <link rel='stylesheet' href='/styles.css'></link>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"></link>
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css"></link>
-          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-          <script src='/bootstrap.min.js'></script>
-        </head>
+        <head dangerouslySetInnerHTML={head} />
         <body>
+          <TopMenu/>
           <div>
-            <ul>
-              <li><Link to={'/'}>메인</Link></li>
-              <li><Link to={'/login'}>로그인</Link></li>
-              <li><Link to={'/signup'}>회원가입</Link></li>
-            </ul>
+            <Row>
+              {this.props.children}
+            </Row>
           </div>
-          <br />
-          <div>
-            {/* Router now automatically populates this.props.children of your components based on the active route. https://github.com/rackt/react-router/blob/latest/CHANGES.md#routehandler */}
-            {this.props.children}
-          </div>
-          <script src='/bundle.js'></script>
+          <script src='bundle.js'></script>
         </body>
       </html>
-    );
-  }
-}
+     )
+   }
+ }
+
+// export default class Layout extends React.Component {
+//   render() {
+//     return (
+//       <html>
+//         <head>
+//           <meta charSet='utf-8' />
+//           <title>React Engine Example App</title>
+//           <link rel='stylesheet' href='/styles.css'></link>
+//           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"></link>
+//           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css"></link>
+//           <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+//           <script src='/bootstrap.min.js'></script>
+//         </head>
+//         <body>
+//           <div>
+//             <ul>
+//               <li><Link to={'/'}>메인</Link></li>
+//               <li><Link to={'/login'}>로그인</Link></li>
+//               <li><Link to={'/signup'}>회원가입</Link></li>
+//             </ul>
+//           </div>
+//           <br />
+//           <div>
+//             {/* Router now automatically populates this.props.children of your components based on the active route. https://github.com/rackt/react-router/blob/latest/CHANGES.md#routehandler */}
+//             {this.props.children}
+//           </div>
+//           <script src='/bundle.js'></script>
+//         </body>
+//       </html>
+//     );
+//   }
+// }
