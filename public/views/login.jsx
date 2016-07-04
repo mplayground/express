@@ -43,6 +43,7 @@ export default class Login extends React.Component {
       success: function(data) {
         console.log("data : " + data);
         alert('로그인 성공');
+        location.href = '/';
       }.bind(this),
       error: function(request, status, error) {
         console.log("request.status : " + request.status);

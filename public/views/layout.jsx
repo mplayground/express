@@ -38,9 +38,7 @@ import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
         <body>
           <TopMenu/>
           <div>
-            <Row>
-              {this.props.children}
-            </Row>
+            {this.props.children}
           </div>
           <script src='bundle.js'></script>
         </body>

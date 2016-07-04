@@ -52,6 +52,9 @@ exports.login = function(req, res, next) {
     if (!user) return res.json(404, {message: 'Something went wrong, please try again.'});
 
     var token = auth.signToken({id:user.id, role:'student'});
+    res.cookie('access_token', token);
+
+    console.log('req.cookies : ' + req.cookies.access_token);
 
     res.json({ access_token: token });
   })(req, res, next);
