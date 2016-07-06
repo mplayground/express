@@ -3,16 +3,17 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import cookie from 'react-cookie';
+import { If, Then, Else } from 'react-if';
 
-class Loginbefore extends React.Component {
+class LoginBefore extends React.Component {
   render() {
-    return(
+    return (
       <Nav pullRight>
         <NavItem eventKey={3} href="/login">로그인</NavItem>
         <NavItem eventKey={4} href="/signup">회원가입</NavItem>
         <NavItem eventKey={5} href="/registerForTeacher">강사지원</NavItem>
       </Nav>
-    )
+    );
   }
 }
 
@@ -26,36 +27,45 @@ class LoginAfter extends React.Component {
 
   logout() {
     cookie.remove('access_token', { path: '/' });
-    location.href = '/';
+    location.href ='/';
   }
 
   render() {
     return (
       <Nav pullRight>
-        <NavItem eventKey={3} href="/">프로필</NavItem>
-        <NavItem eventKey={4} onClick={this.logout}>로그아웃</NavItem>
+        <NavItem eventKey={6} href="/">프로필</NavItem>
+        <NavItem eventKey={7} onClick={this.logout}>로그아웃</NavItem>
       </Nav>
-    )
+    );
   }
 }
 
 export default class TopMenu extends React.Component {
 
-  render(){
+  constructor(props, context) {
+    super(props, context);
 
-    // 토큰 존재여부로 로그인 체크
-    var access_token = cookie.load('access_token');
+    this.state = {
+      access_token: cookie.load('access_token'),
+      is_login: false,
+      login_menu:''
+    };
 
-    console.log(access_token);
-
-    var LoginTop;
-    if(access_token != undefined) {
-      LoginTop = LoginAfter;
-    } else {
-      LoginTop = Loginbefore;
+    if(this.state.access_token != undefined) {
+      this.state.is_login = true;
     }
+  };
 
-    // 뭔가 state를 활용하여 깔끔하게 적용할 수 있을거 같은 생각이 들긴한데..
+  // constructor 또는  render에서 if/else 처리를 할시에 오류가 발생.. 그래서 여기에 함
+  componentDidMount() {
+    if(this.state.is_login) {
+      this.setState({login_menu: <LoginAfter />});
+    } else {
+      this.setState({login_menu: <LoginBefore />});
+    }
+  }
+
+  render() {
     return (
       <Navbar>
         <Navbar.Header>
@@ -67,7 +77,7 @@ export default class TopMenu extends React.Component {
           <NavItem eventKey={1} href="/teachers">강사</NavItem>
           <NavItem eventKey={2} href="/lessons">클래스</NavItem>
         </Nav>
-        <LoginTop />
+        {this.state.login_menu}
       </Navbar>
     );
   }
